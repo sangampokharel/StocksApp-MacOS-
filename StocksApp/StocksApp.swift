@@ -8,10 +8,12 @@
 import SwiftUI
 
 @main
-struct StocksAppApp: App {
+struct StocksApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          HomeScreen()
+                .frame(minWidth: 600,minHeight: 400)
+                .environmentObject(AppState())
         }
     }
 }
