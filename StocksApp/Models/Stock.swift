@@ -12,5 +12,13 @@ struct Stock:Codable {
     let description:String
     let price:Double
     let change:String
-    let historicalPrices:[Double]? 
+    let historicalPrices:[Double]?
+    
+    
+}
+
+extension Stock {
+    static func fromVM(stockVM:StockViewModel) -> Stock {
+        return Stock(symbol: stockVM.symbol, description: stockVM.name, price: stockVM.price, change: stockVM.change, historicalPrices: stockVM.historicalPrices)
+    }
 }

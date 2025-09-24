@@ -9,11 +9,16 @@ import SwiftUI
 
 struct StockListView: View {
     let stocks:[StockViewModel]
+    @EnvironmentObject private var appState:AppState
     var body: some View {
         List {
             BusinessNewsHeaderView()
             ForEach(stocks) {stock in
                 StockCellView(stock: stock)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        appState.route = .stockDetail(stock)
+                    }
             }
         }
     }

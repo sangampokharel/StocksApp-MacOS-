@@ -25,13 +25,21 @@ class Webservice {
     
     func fetchBusinessArticles() async throws -> [Article] {
         
-       let (data,response) = try await URLSession.shared.data(from: Constants.Urls.businessArticles)
+        let (data,response) = try await URLSession.shared.data(from: Constants.Urls.businessArticles)
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw NetworkError.invalidServerResponse
         }
         
         let articleResponse = try JSONDecoder().decode(ArticleResponse.self, from: data)
-        
+        return articleResponse.articles
+    }
+    
+    func fetchBusinessArticlesByStock(stock:Stock) async throws -> [Article] {
+        let (data,response) = try await URLSession.shared.data(from: Constants.Urls.businessArticlesBy(stock: stock))
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NetworkError.invalidServerResponse
+        }
+        let articleResponse = try JSONDecoder().decode(ArticleResponse.self, from: data)
         return articleResponse.articles
     }
 }

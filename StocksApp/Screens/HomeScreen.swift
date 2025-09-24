@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    @EnvironmentObject private var appState:AppState
+    
     var body: some View {
         NavigationView {
             SidebarScreen()
                 .frame(minWidth: 200,maxWidth: 250)
-            NewsArticleListScreen()
+            
+            switch appState.route {
+            case .businessArticles:
+                NewsArticleListScreen()
+            case .stockDetail(let stockViewModel):
+                StockDetailScreen(stock: stockViewModel)
+            }
+            
         }
     }
 }

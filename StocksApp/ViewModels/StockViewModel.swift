@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct StockViewModel:Identifiable {
+struct StockViewModel:Identifiable,Equatable {
+    static func == (lhs: StockViewModel, rhs: StockViewModel) -> Bool {
+        lhs.id == rhs.id
+    }
     
-    let id = UUID()
+    
+    var id = UUID()
     private var stock:Stock
     
     init(stock:Stock) {
@@ -35,5 +39,6 @@ struct StockViewModel:Identifiable {
     var historicalPrices:[Double] {
         stock.historicalPrices ?? []
     }
+    
     
 }

@@ -13,8 +13,6 @@ struct SidebarScreen: View {
     
     var body: some View {
         VStack(alignment:.leading) {
-           
-            
             StockListScreen(vm: StocksListViewModel(appState: appState))
         }
     }
